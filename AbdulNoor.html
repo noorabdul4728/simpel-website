@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abdul Noor Website</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+        .container {
+            text-align: center;
+        }
+        .welcome-message {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        .login-container, .home-container, .games-container, .search-container {
+            text-align: center;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            display: none;
+        }
+        .login-form input, .login-form button {
+            padding: 10px;
+            margin: 5px;
+            font-size: 16px;
+            border-radius: 4px;
+        }
+        .login-form input {
+            border: 1px solid #ccc;
+        }
+        .login-form button {
+            cursor: pointer;
+            background-color: #1abc9c;
+            color: white;
+            border: none;
+        }
+        .login-form button:hover {
+            background-color: #16a085;
+        }
+        .error-message {
+            color: red;
+            display: none;
+        }
+        .nav-links a, .game-links a {
+            display: inline-block;
+            margin: 10px;
+            padding: 10px 20px;
+            text-decoration: none;
+            color: white;
+            background-color: #1abc9c;
+            border-radius: 4px;
+        }
+        .nav-links a:hover, .game-links a:hover {
+            background-color: #16a085;
+        }
+        iframe {
+            width: 100%;
+            height: 500px;
+            border: none;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="welcome-message">Welcome to Abdul Noor Website</div>
+        
+        <!-- Login Container -->
+        <div class="login-container" id="loginContainer">
+            <h1>Login to Access Home Page</h1>
+            <div class="login-form">
+                <input type="password" id="keyInput" placeholder="Enter the key">
+                <button onclick="validateKey()">Submit</button>
+                <p id="error-message" class="error-message">Incorrect key. Please try again.</p>
+            </div>
+        </div>
+        
+        <!-- Home Container -->
+        <div class="home-container" id="homeContainer">
+            <h1>Welcome to Abdul Noor's Home Page</h1>
+            <div class="nav-links">
+                <a href="#" onclick="showSearch()">Search Page</a>
+                <a href="#" onclick="showGames()">Online Games</a>
+            </div>
+        </div>
+        
+        <!-- Games Container -->
+        <div class="games-container" id="gamesContainer">
+            <h1>Online Games</h1>
+            <div class="game-links">
+                <a href="#" onclick="showFlappyBird()">Play Flappy Bird</a>
+                <a href="#" onclick="showTrafficDriver()">Play Traffic Driver</a>
+            </div>
+            <!-- Game iframes -->
+            <div id="gameIframe" style="display: none;">
+                <iframe id="gameFrame" src=""></iframe>
+            </div>
+        </div>
+        
+        <!-- Search Container -->
+        <div class="search-container" id="searchContainer">
+            <h1>Search Page</h1>
+            <p>Enter your search term below:</p>
+            <input type="text" id="searchQuery" placeholder="Search the web">
+            <button onclick="performSearch()">Search</button>
+        </div>
+    </div>
+
+    <script>
+        // Display login container initially
+        document.getElementById('loginContainer').style.display = 'block';
+
+        function validateKey() {
+            const inputKey = document.getElementById('keyInput').value;
+            const correctKey = '4728';
+            const loginContainer = document.getElementById('loginContainer');
+            const homeContainer = document.getElementById('homeContainer');
+            const errorMessage = document.getElementById('error-message');
+            
+            if (inputKey === correctKey) {
+                loginContainer.style.display = 'none';
+                homeContainer.style.display = 'block';
+            } else {
+                errorMessage.style.display = 'block';
+            }
+        }
+
+        function showSearch() {
+            document.getElementById('homeContainer').style.display = 'none';
+            document.getElementById('gamesContainer').style.display = 'none';
+            document.getElementById('searchContainer').style.display = 'block';
+        }
+
+        function showGames() {
+            document.getElementById('homeContainer').style.display = 'none';
+            document.getElementById('searchContainer').style.display = 'none';
+            document.getElementById('gamesContainer').style.display = 'block';
+        }
+
+        function showFlappyBird() {
+            document.getElementById('gameFrame').src = 'https://example.com/flappy-bird'; // Replace with actual URL
+            document.getElementById('gameIframe').style.display = 'block';
+        }
+
+        function showTrafficDriver() {
+            document.getElementById('gameFrame').src = 'https://example.com/traffic-driver'; // Replace with actual URL
+            document.getElementById('gameIframe').style.display = 'block';
+        }
+
+        function performSearch() {
+            const query = document.getElementById('searchQuery').value;
+            if (query) {
+                window.location.href = `https://www.google.com/search?q=${encodeURIComponent(query)}`;
+            }
+        }
+    </script>
+</body>
+</html>
